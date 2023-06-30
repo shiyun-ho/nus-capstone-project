@@ -1,0 +1,61 @@
+<div class="detail-section">
+    <div class="container-fluid" *ngIf="product">
+        <img *ngIf="product.imageUrl" [src]="product.imageUrl" class="detail-img">
+        <h3>{{ product.name }}</h3>
+        <div class="price">{{ product.unitPrice | currency }}</div>
+        <button (click)="addToCart()" class="btn btn-outline-dark">Add to Cart</button>
+        <button (click)="addToTracker()" class="btn btn-outline-dark">Add to Tracker</button>
+
+        <hr>
+
+    </div>
+
+    <div class="container-fluid">
+        <h4>Description</h4>
+        <!-- To add in description -->
+        <!-- Product description -->
+        <ng-container *ngIf="productDescription else noDescription">
+            <p>{{ productDescription.description }}</p>
+        </ng-container>
+        <ng-template #noDescription>
+            <p>No description available.</p>
+        </ng-template>
+
+        <h4>Ingredients</h4>
+        <ng-container *ngIf="productDescription else noIngredients">
+            <p>{{ productDescription.ingredients }}</p>
+        </ng-container>
+        <ng-template #noIngredients>
+            <p>No ingredient list.</p>
+        </ng-template>
+
+
+        <h4>Thoughts from people who've purchased it:</h4>
+        <ng-container *ngIf="productDescription && productDescription.ratingValue else noRating">
+            <p >On average, this fared a <b>{{ productDescription.ratingValue | number:'1.1-2' }}</b>  out of 5.0.</p>
+            <p *ngIf="productDescription.ratingCount">This is based on the opinions of <b>{{ productDescription.ratingCount }}</b> K-Beauty lovers.</p>
+            <p *ngIf="productDescription.bestRating && productDescription.worstRating">Rating for this product can range from <b>{{ productDescription.worstRating | number:'1.1-2' }} 
+                to {{ productDescription.bestRating | number:'1.1-2'}}.</b></p>
+        </ng-container>
+        <ng-template #noRating>
+            <p>No rating value available.</p>
+        </ng-template>
+
+        <h4>Reviews</h4>
+        <ng-container *ngIf="productReview && productReview.length > 0; else noReview">
+            <div> 
+                <div *ngFor="let productReview of productReview">
+                    <q>{{ productReview.review }}</q>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #noReview>
+            <p>No review of this product is available.</p>
+        </ng-template>
+    
+    
+        <a routerLink="/products" class="mt-5">Back</a>
+    </div>
+
+    
+</div>

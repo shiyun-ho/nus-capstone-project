@@ -1,0 +1,19 @@
+.login-status-header{
+    /* -webkit-box-pack:center;
+    -webkit-justify-content:center;
+    -moz-box-pack:center;
+    -ms-flex-pack:center;
+    justify-content:center; 
+    width: 45%;  */
+    display: flex; 
+}
+
+.login-status-user-info{
+    display: inline-block; /* Display the buttons inline */
+    margin-right: 0 10px; /* Add some spacing between the buttons */
+    -webkit-transition:all .5s ease;
+    -o-transition:all .5s ease;
+    -moz-transition:all .5s ease;
+    transition:all .5s ease
+    
+}

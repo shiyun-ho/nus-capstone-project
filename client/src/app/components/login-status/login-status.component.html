@@ -1,0 +1,20 @@
+<div class="login-status-header">
+    
+    <!-- true -->
+    <div *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-dark">
+        Login
+    </div>
+
+    <!-- false -->
+    <div *ngIf="isAuthenticated" (click)="logout()" class="btn btn-dark">
+        Logout
+    </div>
+
+    <div *ngIf="isAuthenticated" routerLink="/past-orders" class="btn btn-dark">
+        Orders
+    </div>
+
+    <div *ngIf="isAuthenticated" routerLink="/tracker" class="btn btn-dark">
+        Tracker
+    </div>
+</div>

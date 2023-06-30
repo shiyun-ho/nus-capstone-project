@@ -1,0 +1,130 @@
+<div class="main-content">
+
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <h3>Tracker: My Skincare Journal</h3>
+
+            <div *ngIf="trackerItems.length > 0">
+                <br><br>
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="20%">Product</th>
+                        <th width="50%">Product Ingredients</th>
+                        <th width="30%">Reactions</th>
+                    </tr>
+
+                    <tr *ngFor="let tempTrackerItem of trackerItems; let i = index">
+                        <td>
+                            <p><b>{{ tempTrackerItem.name }}</b></p>
+
+                            <div class="items align-items-center">
+                                <div class="row no-gutters">
+
+                                    <div class="col ml-4 mr-2">
+                                        Qty: {{ tempTrackerItem.quantity }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <ng-container *ngIf="tempTrackerItem.description else noIngredients">
+                                <!-- <p class="small-font">{{ tempTrackerItem.description.ingredients.split(',').slice(0,
+                                    10).join(', ') }} ...</p> -->
+                                <p class="small-font">{{ tempTrackerItem.description.ingredients }} ...</p>
+                            </ng-container>
+                            <ng-template #noIngredients>
+                                <p>No ingredient list.</p>
+                            </ng-template>
+                        </td>
+
+
+                        <td>
+                            <form [formGroup]="skinConcernForms[i]" (ngSubmit)="onSubmit(i)">
+                                <b>Skin Concern(s):</b><br>
+                                <ng-container *ngFor="let concern of tempTrackerItem.skinConcern">
+                                    <ul>
+                                        {{ concern }}
+                                    </ul>
+                                </ng-container>
+                                <br>
+                                <input formControlName="skinConcern" type="text" class="form-control"
+                                    placeholder="Enter skin concern">
+
+                                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                            </form>
+
+                        </td>
+
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div *ngIf="trackerItems.length == 0" class="text-center">
+                <img src="assets/emptycart.svg" class="img-fluid" alt="Empty Tracker" style="width: 50%;">
+
+                <p class="empty-cart-message">You did not add any products to your tracker.</p>
+            </div>
+
+            <h4>Insights</h4>
+
+            <div *ngIf="trackerItems.length > 0">
+                <br>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Product Watchlist</th>
+                        
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Helps you identify the list of products that you may be allergic to.
+                                Keep track of these products to make informed skincare choices.</p>
+                        </td>
+
+                        
+                    </tr>
+
+                    <ng-container *ngIf="getCommonIngredients().length === 0" class="text-center">
+                        <tr>
+                          <td colspan="3">
+                            <img src="assets/emptycart.svg" class="img-fluid" alt="Empty Tracker" style="width: 50%;">
+                            <p class="empty-cart-message">You do not have any products with common ingredients.</p>
+                          </td>
+                        </tr>
+                      </ng-container>
+                      
+                      <ng-container *ngIf="getCommonIngredients().length > 0">
+                        <tr>
+                          <td colspan="3">
+                            <b>Common Ingredients:</b>
+                            <ul>Common ingredients amongst products which may cause your skin to flare.</ul>
+                            
+                            <ul *ngFor="let ingredient of getCommonIngredients()">{{ ingredient | titlecase }}</ul>
+                            
+                          </td>
+                        </tr>
+                      </ng-container>
+                      
+
+
+                </table>
+
+            </div>
+
+            <div *ngIf="trackerItems.length == 0" class="text-center">
+
+                <img src="assets/tracker.svg" class="img-fluid" alt="Empty Tracker" style="width: 50%;">
+
+                <p class="empty-cart-message">Add product(s) which induced skin flares to generate insights.</p>
+
+            </div>
+
+
+            <br><br><br>
+        </div>
+    </div>
