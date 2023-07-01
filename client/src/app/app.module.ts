@@ -74,14 +74,12 @@ const moduleConfig: OktaConfig = { oktaAuth };
     // OktaAuthModule.forRoot(moduleConfig),
     RouterModule, RouterOutlet
   ],
-  providers: [ProductService,
+  providers: [ProductService,{ provide: OKTA_CONFIG, useValue: { oktaAuth } },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService, multi: true
     },
-
-    { provide: OKTA_CONFIG, useValue: { oktaAuth } }
-  ],
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
