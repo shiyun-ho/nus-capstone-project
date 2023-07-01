@@ -42,11 +42,11 @@
 			<version>2.17.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.okta.spring/okta-spring-boot-starter -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>com.okta.spring</groupId>
 			<artifactId>okta-spring-boot-starter</artifactId>
 			<version>3.0.4</version>
-		</dependency> -->
+		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
